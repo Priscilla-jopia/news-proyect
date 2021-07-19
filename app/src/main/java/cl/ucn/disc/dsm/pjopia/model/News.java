@@ -4,6 +4,8 @@
 
 package cl.ucn.disc.dsm.pjopia.model;
 
+import net.openhft.hashing.LongHashFunction;
+
 import org.threeten.bp.ZonedDateTime;
 
 public final  class News {
@@ -70,14 +72,36 @@ public final  class News {
 
     public News(final String title, final String source, final String author, final String url, final String urlImage, final String description, final String contnent, final ZonedDateTime publishedAt) {
         //FIXME: add the hash(title+source+author)
-        this.id = 0L;
+
+        if (title == null){
+            title = "No title"
+        }
         this.title = title;
+
+        if (source = null || source.length() ≤ 4 ){
+            throw new IllegalArgumentException("Source no valid");
+        }
+
+        if (source.length() ≤ 4){
+            throw new IllegalArgumentException("Source size ≤ 4")
+        }
+
         this.source = source;
+
+        this.id = LongHashFunction.xx().hashChars(
+                input: title +"|" + source
+        );
+
+
         this.author = author;
         this.url = url;
         this.urlImage = urlImage;
         this.description = description;
         this.contnent = contnent;
+
+        if (publishedAt == null){
+            throw new IllegalArgumentException("The PublishedAt needed!")
+        }
         this.publishedAt = publishedAt;
     }
 
