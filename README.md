@@ -14,6 +14,14 @@ package externals* #ffcccc {
         }
     }
 
+    package net.openhft.hashing {
+
+        class LongHashFunction {
+            ...
+        }
+
+    }
+
 }
 package cl.ucn.disc.dsm.pjopia { 
 
@@ -41,6 +49,7 @@ package cl.ucn.disc.dsm.pjopia {
          
         } 
         News *--> "1" ZoneDateTime: - publishedAt 
+        News ..> LongHashFunction: <<use>>
     }
     package services #ccccff {
 
