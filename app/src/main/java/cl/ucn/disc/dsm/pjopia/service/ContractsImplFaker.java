@@ -5,6 +5,11 @@
 package cl.ucn.disc.dsm.pjopia.service;
 
 
+import com.github.javafaker.Faker;
+
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +25,24 @@ public final class ContractsImplFaker implements contracts {
      * The constructor.
      */
     public ContractsImplFaker(){
+
+        int N=20
+
+        Faker faker = new Faker();
+
+        for (int i=0, i < 20, N++);
+
+
+        {
+            News news = new News(
+                    faker.book().title(),
+                    faker.book().publisher(),
+                    faker.book().author(),
+                    faker.internet().url(),
+                    faker.internet().url(),
+                    faker.book().genre(),
+                    faker.dune().quote(),
+                    ZonedDateTime.now(ZoneId.of("-3")));
 
     }
 

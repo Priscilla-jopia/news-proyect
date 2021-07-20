@@ -50,7 +50,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-simple:1.7.30'
 
     //Java faker
-    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
 
     // Zero-Allocation Hashing
     // https://github.com/OpenHFT/Zero-Allocation-Hashing

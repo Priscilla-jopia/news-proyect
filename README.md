@@ -19,8 +19,14 @@ package externals* #ffcccc {
         class LongHashFunction {
             ...
         }
-
     }
+    package com.github.javafaker {
+        class Faker {
+            ...
+       } 
+    }
+   
+  
 
 }
 package cl.ucn.disc.dsm.pjopia { 
@@ -49,7 +55,7 @@ package cl.ucn.disc.dsm.pjopia {
          
         } 
         News *--> "1" ZoneDateTime: - publishedAt 
-        News ..> LongHashFunction: <<use>>
+        News ..> LongHashFunction: }<<use>>
     }
     package services #ccccff {
 
@@ -59,7 +65,11 @@ package cl.ucn.disc.dsm.pjopia {
         }   
         Contracts ..> News: <<use>>
 
-}
+        class ContractsImplFaker { 
+            -ListNews: List<News>
+        }
+        ContractsImplFaker ..> Contracts
+        ContractsImplFaker ..> Faker: <<use>>
 
 @enduml
 ```
