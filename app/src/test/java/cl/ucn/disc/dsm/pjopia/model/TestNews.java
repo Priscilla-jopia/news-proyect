@@ -55,6 +55,9 @@ public final class TestNews {
 
          Assertions.assertNotNull(news.getId());
          Assertions.assertNotNull(news.getPublishedAt());
+         Assertions.assertNotNull(news.getUrl());
+         Assertions.assertNotNull(news.getDescription());
+         Assertions.assertNotNull(news.getContnent());
         }
         //Test no valid data
 

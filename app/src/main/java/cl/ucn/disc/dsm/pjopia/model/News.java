@@ -70,16 +70,20 @@ public final  class News {
      * @param publishedAt
      */
 
-    public News(final String title, final String source, final String author, final String url, final String urlImage, final String description, final String contnent, final ZonedDateTime publishedAt) {
+    public News(final String title,
+                final String source,
+                final String author,
+                final String url,
+                final String urlImage,
+                final String description,
+                final String contnent,
+                final ZonedDateTime publishedAt) {
         //FIXME: add the hash(title+source+author)
 
-        if (title == null){
-            title = "No title"
-        }
-        this.title = title;
+        this.title = (title ≠ null && title.length() >0) ? title: "No Title";
 
-        if (source = null || source.length() ≤ 4 ){
-            throw new IllegalArgumentException("Source no valid");
+        if (source == null ){
+            throw new IllegalArgumentException("Source was null");
         }
 
         if (source.length() ≤ 4){
@@ -88,12 +92,15 @@ public final  class News {
 
         this.source = source;
 
+        this.author = (author ≠ null && author.length() >0 ) ? author : "No Author";
+
         this.id = LongHashFunction.xx().hashChars(
-                input: title +"|" + source
+                this.getTitle() + "|" + this.getSource() + "|" + this.getAuthor()
+
         );
 
 
-        this.author = author;
+
         this.url = url;
         this.urlImage = urlImage;
         this.description = description;
