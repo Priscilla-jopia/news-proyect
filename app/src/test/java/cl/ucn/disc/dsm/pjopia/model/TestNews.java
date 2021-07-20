@@ -4,38 +4,56 @@
 
 package cl.ucn.disc.dsm.pjopia.model;
 
+import com.github.javafaker.Faker;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.logging.LoggerFactory;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
+
+import java.util.logging.Logger;
 
 
 public final class TestNews {
 
+
+    /**
+     * The logger
+     */
+
+    private static final Logger log = LoggerFactory.getLogger(TestNews.class);
+
+    private static String toString(final Object obj){
+        return ToStringBuilder.reflectionToString(Obj, ToStringStyle.MULTI_LINE_STYLE);
+    }
     /**
      * Testing the constructor
      */
     @Test
     public void testConstructor() {
 
+        log.debug("Starting the Constructor..");
+
+        Faker faker = new Faker();
+        
+
         {
          News news = new News(
-                title: "The title",
-                source; "The source",
-                author; "The Author",
-                url: "The url",
-                urlImage: "TheImage Url",
-                description; "The description",
-                content; "The content",
+                faker.book().title(),
+                faker.book().publisher(),
+                faker.book().author(),
+                faker.internet().url(),
+                faker.internet().url(),
+                faker.book().genre(),
+                faker.dune().quote(),
                 ZonedDateTime.now(ZoneId.of("-3")));
+
+         log.info("The News: {}", toString(news));
+
          Assertions.assertNotNull(news.getId());
-         Assertions.assertEquals( expected: "The title", news.getTitle());
-         Assertions.assertEquals( expected: "The source", news.getSource());
-         Assertions.assertEquals( expected: "The Author", news.getAuthor());
-         Assertions.assertEquals( expected: "The Url", news.getUrl());
-         Assertions.assertEquals( expected: "The Image Url", news.getUrlImage());
-         Assertions.assertEquals( expected: "The description", news.getDescription());
-         Assertions.assertEquals( expected: "The content", news.getContnent());
          Assertions.assertNotNull(news.getPublishedAt());
         }
         //Test no valid data
@@ -77,6 +95,9 @@ public final class TestNews {
         Assertions.assertEquals( expected: "no title", news.getTitle()
 
         }
+
+        log.debug("Done");
+
     }
 
 
