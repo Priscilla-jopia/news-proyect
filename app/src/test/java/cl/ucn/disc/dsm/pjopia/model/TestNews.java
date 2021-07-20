@@ -38,7 +38,7 @@ public final class TestNews {
         log.debug("Starting the Constructor..");
 
         Faker faker = new Faker();
-        
+
 
         {
          News news = new News(
