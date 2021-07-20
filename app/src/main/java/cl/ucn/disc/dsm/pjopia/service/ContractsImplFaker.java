@@ -34,7 +34,12 @@ public final class ContractsImplFaker implements contracts {
             throw new IllegalArgumentException("Size cannot be zero or negative");
         }
 
-        return Collections.unmodifiableList(this.listNews)
+        if (size > this.listNews.size()){
+            throw new IndexOutOfBoundsException("Size > The current size");
+        }
+        return Collections.unmodifiableList(
+            this.listNews.subList(this.listNews.size() - size, this.listNews.size())
+            );
     }
 
     @Override
@@ -51,6 +56,10 @@ public final class ContractsImplFaker implements contracts {
             }
 
         this.listNews.add(news);
+
+
+        Collections.sort(this.listNews,
+                (a, b) --> b.getPublisheAt().compareTo(a.getPublisedAt()));}
 
     }
 }

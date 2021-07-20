@@ -4,6 +4,8 @@
 
 package cl.ucn.disc.dsm.pjopia.service;
 
+import com.github.javafaker.Faker;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.jupiter.api.Assertions;
@@ -38,7 +40,11 @@ public final class TestContracts {
 
         contracts contracts = new ContractsImplFaker();
 
-        Faker faker
+        Faker faker = new Faker();
+
+
+;
+        for (i=0; i<20; i++){
 
         News news = new News(
                 faker.book().title(),
@@ -50,17 +56,38 @@ public final class TestContracts {
                 faker.dune().quote(),
                 ZonedDateTime.now(ZoneId.of("-3")));
 
-        log.info("The News: {}", toString(news));
+        log.info("News {}: {}.", toString(news));
         contracts.save(news);
 
         Assertions.assertThrows(IllegalArgumentException.class, () -->{
             contracts.save(news:null);
         });
 
-        Assertions.assertEquals(expected:1, actual: contracts.retrieveNews(size:10).size);
+        Assertions.assertEquals(10,  contracts.retrieveNews(10).size);
+        Assertions.assertEquals(1, contracts.retrieveNews(1).size);
+
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -->{
+            Assertions.assertEquals(100, contracts.retrieveNews(100).size);
+        });
+
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -->{
+            contracts.retrieveNews(-100);
+            contracts.retrieveNews( 0);
+        });
+
+        News news = contracts.retrieveNews(1).get(0);
+        Assertions.assertNotNull(news);
 
         Assertions.assertThrows(IllegalArgumentException.class, () -->{
             contracts.save(news);
-        });
+             });
+        /*
+        Assertions.assertThrows(IllegalArgumentException.class, () -->{
+         contracts.save(news);
+
+        });*/
+    }
+}
     }
 }
