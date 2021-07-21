@@ -18,8 +18,22 @@ android {
     }
 
     buildTypes {
-        release {
+        debug{
+            debuggable true
             minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            crunchPngs false
+            versionNameSuffix ".d"
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            crunchPngs true
+            versionNameSuffix ".r"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
