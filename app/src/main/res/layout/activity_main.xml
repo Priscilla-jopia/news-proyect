@@ -20,4 +20,18 @@
         app:subtitle="@string/app_subtitle"
         app:title="@string/app_title" />
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/am_srl_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/am_rv_listnews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
