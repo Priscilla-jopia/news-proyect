@@ -14,6 +14,7 @@ public final class MainActivity : AppCompatActivity() {
 
     private ActivityMainBinding binding;
 
+    private NewsViewModel newsViewModel;
 
 
     /**
@@ -26,13 +27,29 @@ public final class MainActivity : AppCompatActivity() {
         setContentView(this.binding.getRoot());
 
         this.setSupportActionBar(this.binding.toolbar);
+
+        this.newsViewModel= new ViewModelProvider(this).get(NewsViewModel class);
+
+
+        this.binding.amSrRefresh.SetOnRefreshListener(() -->{
+            log.debug("Refreshing  The News..")
+
+            this.newsViewModel.refresh()
+        });
+
+        this.newsViewModel.getNews().observe(this, news--> ){
+            log.debug("News: {}", news.size());
+
+            this.binding.amSrlRefresh.setRefreshing(false);
+        }
+
     }
 
     override fun onStart() {
         super.onStart();
         Log.d("TheNews", "OnStart!!!");
 
-    }
+    }{
 
 
 }
