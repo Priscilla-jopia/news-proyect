@@ -7,8 +7,14 @@ package cl.ucn.disc.dsm.pjopia
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import cl.ucn.disc.dsm.pjopia.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+public final class MainActivity : AppCompatActivity() {
+
+
+    private ActivityMainBinding binding;
+
+
 
     /**
      * @param savedInstanceState the instance.
@@ -16,8 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Log.d("TheNews", "OnCreate!!!");
+        this.binding = ActivityMainBinding.inflate(layoutInflater());
+        setContentView(this.binding.getRoot());
+
+        this.setSupportActionBar(this.binding.toolbar);
     }
 
     override fun onStart() {

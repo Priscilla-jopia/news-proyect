@@ -10,9 +10,9 @@
 
 
     <color name="ToolbarTitleTextColor">@color/lightgreen_200</color>
-    <color name="ToolbarBackground">@color/lightgreen_500</color>
+    <color name="ToolbarBackground">@color/lightgreen_900</color>
     <color name="ToolbarSubtitleTextColor">@color/lightgreen_200</color>
 
 
 
-</resources>
+<resources></resources>
