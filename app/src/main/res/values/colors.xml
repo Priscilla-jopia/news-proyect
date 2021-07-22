@@ -13,6 +13,10 @@
     <color name="ToolbarBackground">@color/lightgreen_500</color>
     <color name="ToolbarSubtitleTextColor">@color/lightgreen_200</color>
 
+    <color name="textColorPrimary">@color/lightgreen_900</color>
+    <color name="textColorSecondary">@color/lightgreen_800</color>
+    <color name="textColorTerciary">@color/lightgreen_700</color>
+
 
 
 </resources>
