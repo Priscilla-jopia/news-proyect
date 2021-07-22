@@ -4,18 +4,25 @@
 
 package cl.ucn.disc.dsm.pjopia
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import cl.ucn.disc.dsm.pjopia.databinding.ActivityMainBinding
+import cl.ucn.disc.dsm.pjopia.model.News
+import org.slf4j.LoggerFactory
 
 public final class MainActivity : AppCompatActivity() {
 
+    private val log = LoggerFactory.getLogger(MainActivity::class.java)
+
+
+    private static final Log
 
     private ActivityMainBinding binding;
 
     private NewsViewModel newsViewModel;
 
+    private NewsAdapter newsAdapter;
 
     /**
      * @param savedInstanceState the instance.
@@ -28,7 +35,7 @@ public final class MainActivity : AppCompatActivity() {
 
         this.setSupportActionBar(this.binding.toolbar);
 
-        this.newsViewModel= new ViewModelProvider(this).get(NewsViewModel class);
+        this.newsViewModel= new ViewModelProvider(this).get(News.NewsViewModel class);
 
 
         this.binding.amSrRefresh.SetOnRefreshListener(() -->{
@@ -37,8 +44,16 @@ public final class MainActivity : AppCompatActivity() {
             this.newsViewModel.refresh()
         });
 
+        this.newsAdapter = new NewsAdapter();
+
+            this.binding.amRvListnews.setLayoutManager(new LinearLayoutManager(this));
+            this.binding.amRvListnews.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+            this.binding.amRvListnews.setAdapter(this.Adapter);
+
         this.newsViewModel.getNews().observe(this, news--> ){
-            log.debug("News: {}", news.size());
+            Log.d("News: {}", news.size());
+
+            this.newsAdapter.setNews(news);
 
             this.binding.amSrlRefresh.setRefreshing(false);
         }
@@ -49,7 +64,7 @@ public final class MainActivity : AppCompatActivity() {
         super.onStart();
         Log.d("TheNews", "OnStart!!!");
 
-    }{
+    }
 
 
 }

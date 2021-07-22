@@ -4,16 +4,28 @@
 
 package cl.ucn.disc.dsm.pjopia.model;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import net.openhft.hashing.LongHashFunction;
 
+import org.slf4j.LoggerFactory;
 import org.threeten.bp.ZonedDateTime;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+import cl.ucn.disc.dsm.pjopia.service.ContractsImplFaker;
 
 public final  class News {
 
     /**
      * Unique id.
      */
-    private final Long id;
+    private  Long id;
 
     /**
      * The title.
@@ -21,17 +33,17 @@ public final  class News {
      * -not null.
      * -size > 2.
      */
-    private final String title;
+    private String title;
 
     /**
      * The source.
      */
-    private final String source;
+    private String source;
 
     /**
      * The author.
      */
-    private final String author;
+    private String author;
 
     /**
      * The url.
@@ -80,19 +92,19 @@ public final  class News {
                 final ZonedDateTime publishedAt) {
         //FIXME: add the hash(title+source+author)
 
-        this.title = (title ≠ null && title.length() >0) ? title: "No Title";
+        this.title = (title != null && title.length() >0) ? title: "No Title";
 
         if (source == null ){
             throw new IllegalArgumentException("Source was null");
         }
 
-        if (source.length() ≤ 4){
+        if (source.length() <= 2){
             throw new IllegalArgumentException("Source size ≤ 4 [" + source + "]");
         }
 
         this.source = source;
 
-        this.author = (author ≠ null && author.length() >0 ) ? author : "No Author";
+        this.author = (author !=null ) ? author : "No Author";
 
         this.id = LongHashFunction.xx().hashChars(
                 this.getTitle() + "|" + this.getSource() + "|" + this.getAuthor()
@@ -107,7 +119,7 @@ public final  class News {
         this.contnent = contnent;
 
         if (publishedAt == null){
-            throw new IllegalArgumentException("The PublishedAt needed!")
+            throw new IllegalArgumentException("The PublishedAt needed!");
         }
         this.publishedAt = publishedAt;
     }
@@ -147,6 +159,13 @@ public final  class News {
     public ZonedDateTime getPublishedAt() {
         return publishedAt;
     }
+
+
+
+
+
+
+
 }
 
 

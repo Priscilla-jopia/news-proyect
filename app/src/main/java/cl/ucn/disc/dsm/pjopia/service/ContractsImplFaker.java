@@ -15,8 +15,9 @@ import java.util.Collections;
 import java.util.List;
 
 import cl.ucn.disc.dsm.pjopia.model.News;
+import cl.ucn.disc.dsm.pjopia.service.newsapi.Contracts;
 
-public final class ContractsImplFaker implements contracts {
+public final class ContractsImplFaker implements Contracts {
 
 
     private final List<News> listNews = new ArrayList<>();
@@ -24,13 +25,13 @@ public final class ContractsImplFaker implements contracts {
     /**
      * The constructor.
      */
-    public ContractsImplFaker(){
+    public List<News> ContractsImplFaker(){
 
-        int N=20
+        int N=20;
 
         Faker faker = new Faker();
 
-        for (int i=0, i < 20, N++);
+        for(int i=0, i < N, i++) {
 
 
         {
@@ -49,11 +50,11 @@ public final class ContractsImplFaker implements contracts {
     /**
      * Get the list of News
      * @param size of the list.
-     * @return the list of News.
+     * @return .
      */
     @Override
     public List<News> retrieveNews(final Integer size) {
-        if ( size ≤ 0 ) {
+        if ( size <= 0 ) {
             throw new IllegalArgumentException("Size cannot be zero or negative");
         }
 
@@ -61,8 +62,8 @@ public final class ContractsImplFaker implements contracts {
             throw new IndexOutOfBoundsException("Size > The current size");
         }
         return Collections.unmodifiableList(
-            this.listNews.subList(this.listNews.size() - size, this.listNews.size())
-            );
+                this.listNews.subList(this.listNews.size()-size, this.listNews.size())
+        );
     }
 
     @Override
@@ -74,15 +75,14 @@ public final class ContractsImplFaker implements contracts {
     }
 
         for (News n : this.listNews){
-            if (n ≠ null && n.getId().equals(news.getId())){
+            if (n != null && n.getId().equals(news.getId())){
                 throw new IllegalArgumentException("News already in the list");
             }
-
+        }
         this.listNews.add(news);
 
 
-        Collections.sort(this.listNews,
-                (a, b) --> b.getPublisheAt().compareTo(a.getPublisedAt()));}
+        this.listNews.sort(a, b) -> b.getPublisheAt().compareTo(a.getPublisedAt());
 
     }
 }

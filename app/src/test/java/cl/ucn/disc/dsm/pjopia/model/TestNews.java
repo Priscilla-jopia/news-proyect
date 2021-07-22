@@ -27,7 +27,7 @@ public final class TestNews {
     private static final Logger log = LoggerFactory.getLogger(TestNews.class);
 
     private static String toString(final Object obj){
-        return ToStringBuilder.reflectionToString(Obj, ToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(obj, ToStringStyle.MULTI_LINE_STYLE);
     }
     /**
      * Testing the constructor
@@ -40,7 +40,7 @@ public final class TestNews {
         Faker faker = new Faker();
 
 
-        {
+       {
          News news = new News(
                 faker.book().title(),
                 faker.book().publisher(),
@@ -51,10 +51,11 @@ public final class TestNews {
                 faker.dune().quote(),
                 ZonedDateTime.now(ZoneId.of("-3")));
 
-         log.info("The News: {}", toString(news));
+         log.info("The News: {}"+ toString(news));
 
          Assertions.assertNotNull(news.getId());
          Assertions.assertNotNull(news.getPublishedAt());
+         Assertions.assertNotNull(news.getUrl());
          Assertions.assertNotNull(news.getUrl());
          Assertions.assertNotNull(news.getDescription());
          Assertions.assertNotNull(news.getContnent());
@@ -63,45 +64,58 @@ public final class TestNews {
 
         {
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -->{
-                News news = new News(
-                title: null,
-                source; "The source",
-                author; "The Author",
-                url: "The url",
-                urlImage: "TheImage Url",
-                description; "The description",
-                content; "The content",
-                publishedAt: null);
-            );
+            Assertions.assertThrows(
+                    IllegalArgumentException.class,
+                    () -> {
+                        // Published At
+                        new News(
+                                null,
+                                "The Source",
+                                "The Author",
+                                "The Url",
+                                "The Imagen Url",
+                                "The Description",
+                                "The Content",
+                                null);
+                        // Source null
+                        new News(
+                                "The Title",
+                                null,
+                                "The Author",
+                                "The Url",
+                                "The Imagen Url",
+                                "The Description",
+                                "The Content",
+                                ZonedDateTime.now(ZoneId.of("-3")));
+                        // Source size < 4
+                        new News(
+                                "The Title",
+                                "The",
+                                "The Author",
+                                "The Url",
+                                "The Imagen Url",
+                                "The Description",
+                                "The Content",
+                                ZonedDateTime.now(ZoneId.of("-3")));
 
-            News news = new News(
-                    title: "The title",
-                source; null,
-                author; "The Author",
-                url: "The url",
-                urlImage: "TheImage Url",
-                description; "The description",
-                content; "The content",
-                ZonedDateTime.now(ZoneId.of("-3")));
+                    });
+
+            // Title validation
+            News news =
+                    new News(
+                            null,
+                            "The Source",
+                            "The Author",
+                            "The Url",
+                            "The Imagen Url",
+                            "The Description",
+                            "The Content",
+                            ZonedDateTime.now(ZoneId.of("-3")));
+            Assertions.assertEquals("No Title", news.getTitle());
         }
-
-        News news = new News(
-                title: null,
-                source; "The source",
-                author; "The Author",
-                url: "The url",
-                urlImage: "TheImage Url",
-                description; "The description",
-                content; "The content",
-                ZonedDateTime.now(ZoneId.of("-3")));
-        Assertions.assertEquals( expected: "no title", news.getTitle()
-
-        }
-
-        log.debug("Done");
-
     }
-
-
 }
+
+
+
+

@@ -2,13 +2,13 @@
  * Copyright (c) 2021. Priscilla Jopia
  */
 
-package cl.ucn.disc.dsm.pjopia.service;
+package cl.ucn.disc.dsm.pjopia.service.newsapi;
 
 import java.util.List;
 
 import cl.ucn.disc.dsm.pjopia.model.News;
 
-public interface contracts {
+public interface Contracts {
 
 
     /**
